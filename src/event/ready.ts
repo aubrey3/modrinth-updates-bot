@@ -26,7 +26,7 @@ export const readyEventDefinition: EventDefinition<"ready"> = {
                 )
                 .setTimestamp()
             const channel = guild.channels.cache.find(element => element.id === project.getDataValue("post_channel"))
-            if (channel?.isText() || channel?.isThread())
+            if (channel?.isText())
                 channel.send({ embeds: [ update ] })
         }
 
@@ -55,18 +55,14 @@ export const readyEventDefinition: EventDefinition<"ready"> = {
                             project_id: fetchedProject.id,
                         },
                     })
-
-                for (let i = 0; i < guilds.size; i++) {
-                    const guild = guilds.at(i)
-                    if (guild?.id === project.getDataValue("guild_id")) {
-                        sendUpdateMessage(project, fetchedProject, guild)
-                    }
-                }
+                
+                const guild = guilds.get(project.getDataValue("guild_id"))
+                if (guild)
+                    sendUpdateMessage(project, fetchedProject, guild)
             }
         }
 
-        // 10m = 600,000ms
         doUpdateCheck()
-        setInterval(doUpdateCheck, 600000)
+        setInterval(doUpdateCheck, 600_000)
     }
 }

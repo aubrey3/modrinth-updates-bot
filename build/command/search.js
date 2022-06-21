@@ -10,7 +10,7 @@ export const searchCommandDefinition = {
         .setRequired(true)),
     action: async (interaction) => {
         await interaction.deferReply();
-        const query = interaction.options.getString("project") ?? "";
+        const query = interaction.options.getString("project", true);
         const searchTerm = new URLSearchParams({ query });
         const searchResult = await fetch(`https://api.modrinth.com/v2/search?${searchTerm}`);
         const { hits } = await searchResult.json();

@@ -8,10 +8,14 @@ export const listCommandDefinition: CommandDefinition = {
 		.setName("list")
 		.setDescription("Get a list of all the projects currently in tracking."),
 	action: async (interaction: CommandInteraction) => {
+		if (!interaction.guild)
+        	return await interaction.reply({ content: "Interaction has no guild", ephemeral: true })
+
 		await interaction.deferReply()
+
 		const projects = await Project.findAll({
 			where: {
-				guild_id: interaction.guild?.id,
+				guild_id: interaction.guild.id,
 			},
 		})
 
@@ -20,7 +24,7 @@ export const listCommandDefinition: CommandDefinition = {
 			list += `**Title:** ${
 				inlineCode(project.getDataValue("project_title"))} | **ID:** ${
 				inlineCode(project.getDataValue("project_id"))} | **Updates Channel:** ${
-				interaction.guild?.channels.cache.find(element => element.id === project.getDataValue("post_channel"))}\n`
+				interaction.guild.channels.cache.find(element => element.id === project.getDataValue("post_channel"))}\n`
 		}
 
 		const trim = (str: string, max: number) => (str.length > max ? `${str.slice(0, max - 3)}...` : str)

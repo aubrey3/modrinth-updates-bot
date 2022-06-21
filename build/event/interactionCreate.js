@@ -19,11 +19,15 @@ export const interactionCreateEventDefinition = {
         }
         else if (interaction.isButton()) {
             if (interaction.customId.startsWith("track:")) {
-                if (!interaction.memberPermissions?.has(Permissions.FLAGS.MANAGE_CHANNELS))
+                if (!interaction.memberPermissions || !interaction.memberPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS))
                     return await interaction.reply({ content: "You can only add projects to tracking if you have the \"Manage Channels\" permission.", ephemeral: true });
+                if (!interaction.guild)
+                    return await interaction.reply({ content: "Interaction has no guild", ephemeral: true });
                 const projectId = interaction.customId.substring(6);
                 await interaction.deferReply();
-                trackProject(interaction, interaction.guild?.channels.cache.find(element => element.id === interaction.channel?.id), projectId);
+                const channel = interaction.guild.channels.cache.find(element => element.id === interaction.channel?.id);
+                if (channel?.isText() && channel?.isThread())
+                    trackProject(interaction, channel, projectId);
             }
         }
     }

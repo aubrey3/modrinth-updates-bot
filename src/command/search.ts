@@ -15,10 +15,8 @@ export const searchCommandDefinition: CommandDefinition = {
     action: async (interaction: CommandInteraction) => {
         await interaction.deferReply()
 
-        const query = interaction.options.getString("project") ?? ""
-        const searchTerm = new URLSearchParams({ query })
-
-        const searchResult = await fetch(`https://api.modrinth.com/v2/search?${searchTerm}`)
+        const query = interaction.options.getString("project", true)
+        const searchResult = await fetch(`https://api.modrinth.com/v2/search?${new URLSearchParams({ query })}`)
         const { hits } = await searchResult.json()
 
         if (!hits.length) {
