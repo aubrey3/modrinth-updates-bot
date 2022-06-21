@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./build",
+        "sourceMap": true,
+        "allowJs": true,
+        "target": "ES2022",
+        "noFallthroughCasesInSwitch": true,
+        "allowUnreachableCode": false,
+        // "noImplicitAny": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "typeRoots": ["./typings", "./node_modules/@types"]
+    },
+}

@@ -1,30 +1,27 @@
 {
   "name": "modrinth-bot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Search Modrinth for projects and get notified when a project gets updated.",
-  "main": "index.js",
+  "main": "build/bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
     "start": "node . | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss",
-    "deploy": "node deploy-commands.js | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss",
+    "deploy": "node build/deploy-commands.js | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss",
     "global-deploy": "node global-deploy-commands.js | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss",
-    "lint": "eslint .",
     "dbInit": "node dbInit.js | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss",
     "dbReset": "node dbInit.js -f | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss"
   },
-  "author": "beansquared",
+  "author": "Lily & Aubrey",
   "license": "ISC",
   "dependencies": {
     "@discordjs/rest": "^0.4.1",
-    "dayjs": "^1.11.2",
     "discord.js": "^13.6.0",
-    "pino": "^7.0.0-rc.9",
-    "pino-pretty": "^7.6.1",
+    "dotenv": "^16.0.1",
     "sequelize": "^6.19.2",
-    "sqlite3": "^5.0.8",
-    "undici": "^5.2.0"
+    "sqlite3": "^5.0.8"
   },
   "devDependencies": {
-    "eslint": "^8.13.0"
+    "@types/node": "^18.0.0",
+    "typescript": "^4.7.4"
   }
 }

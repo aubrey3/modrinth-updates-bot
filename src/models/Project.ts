@@ -1,5 +1,19 @@
-module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('Project', {
+import { Sequelize, DataTypes, Model, Optional } from "sequelize"
+
+export type ProjectAttributes = {
+	project_id: string,
+	project_type: string,
+	project_slug: string,
+	project_title: string,
+	date_modified: Date,
+	guild_id: string,
+	post_channel: string
+}
+
+export type ProjectCreationAttributes = Optional<ProjectAttributes, "project_id">
+
+export default (sequelize: Sequelize) => {
+	return sequelize.define<Model<ProjectAttributes, ProjectCreationAttributes>>("Project", {
 		project_id: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -30,5 +44,5 @@ module.exports = (sequelize, DataTypes) => {
 		},
 	}, {
 		timestamps: false,
-	});
-};
+	})
+}
