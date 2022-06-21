@@ -2,12 +2,13 @@
   "name": "modrinth-bot",
   "version": "2.0.0",
   "description": "Search Modrinth for projects and get notified when a project gets updated.",
+  "type": "module",
   "main": "build/bot.js",
   "scripts": {
     "build": "tsc",
     "start": "node .",
     "deploy": "node build/deploy-commands.js",
-    "global-deploy": "node global-deploy-commands.js"
+    "global-deploy": "node build/global-deploy-commands.js"
   },
   "author": "Lily & Aubrey",
   "license": "ISC",

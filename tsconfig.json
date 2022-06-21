@@ -3,13 +3,16 @@
         "rootDir": "./src",
         "outDir": "./build",
         "sourceMap": true,
-        "allowJs": true,
         "target": "ES2022",
         "noFallthroughCasesInSwitch": true,
         "allowUnreachableCode": false,
-        // "noImplicitAny": true,
+        "noImplicitAny": true,
+        "strict": true,
         "moduleResolution": "node",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "typeRoots": ["./typings", "./node_modules/@types"]
     },
+    "include": ["src"]
 }

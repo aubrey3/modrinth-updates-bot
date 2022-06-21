@@ -12,8 +12,10 @@ export interface ProjectAttributes {
 
 export type ProjectCreationAttributes = Optional<ProjectAttributes, "project_id">
 
+export type ProjectModel = Model<ProjectAttributes, ProjectCreationAttributes>
+
 export const MkProject = (sequelize: Sequelize) => {
-    return sequelize.define<Model<ProjectAttributes, ProjectCreationAttributes>>("Project", {
+    return sequelize.define<ProjectModel>("Project", {
         project_id: {
             type: DataTypes.STRING,
             allowNull: false,
