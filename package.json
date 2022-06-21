@@ -5,11 +5,9 @@
   "main": "build/bot.js",
   "scripts": {
     "build": "tsc",
-    "start": "node . | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss",
-    "deploy": "node build/deploy-commands.js | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss",
-    "global-deploy": "node global-deploy-commands.js | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss",
-    "dbInit": "node dbInit.js | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss",
-    "dbReset": "node dbInit.js -f | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss"
+    "start": "node .",
+    "deploy": "node build/deploy-commands.js",
+    "global-deploy": "node global-deploy-commands.js"
   },
   "author": "Lily & Aubrey",
   "license": "ISC",
